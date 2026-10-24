@@ -1,0 +1,23 @@
+# Secrets - never commit
+.env
+.env.*
+config/default.json
+traccar.xml
+key.properties
+*.jks
+*.keystore
+google-services.json
+GoogleService-Info.plist
+firebase-service-account*.json
+*.pem
+
+# Dependencies and builds
+node_modules/
+dist/
+build/
+.dart_tool/
+
+# Backups and logs
+*.dump
+mongo-backup/
+*.log
