@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Licences — TrackRoutePro Docs</title>
+
+  <meta name="description" content="Third-party components, services and licence terms for TrackRoutePro whitelabel." />
+
+  <link rel="stylesheet" href="assets/style.css" />
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="19" y2="6" />
+        <line x1="3" y1="12" x2="19" y2="12" />
+        <line x1="3" y1="18" x2="19" y2="18" />
+      </svg>
+
+    </button>
+
+    <a href="index.html" class="header-brand">
+
+      <img src="assets/logo.jpg" alt="TrackRoutePro logo" />
+
+      <div>
+        <div class="header-brand-name">TrackRoutePro</div>
+        <div class="header-brand-sub">Whitelabel Edition</div>
+      </div>
+
+    </a>
+
+    <div class="header-spacer"></div>
+
+    <span class="header-badge">v1.0 Docs</span>
+
+  </header>
+
+  <div id="sidebar-overlay"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:89;backdrop-filter:blur(4px)"></div>
+
+  <div class="layout">
+
+    <nav class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Getting Started</div><a href="index.html" class="nav-link"><span
+            class="nav-num">🏠 </span> Overview</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Documentation</div>
+
+        <a href="01-architecture.html" class="nav-link"><span class="nav-num">1</span> Architecture</a>
+
+        <a href="02-requirements.html" class="nav-link"><span class="nav-num">2</span> Requirements</a>
+
+        <a href="03-server-setup.html" class="nav-link"><span class="nav-num">3</span> Server Setup</a>
+
+        <a href="04-traccar.html" class="nav-link"><span class="nav-num">4</span> Traccar Server</a>
+
+        <a href="05-backend.html" class="nav-link"><span class="nav-num">5</span> Backend</a>
+
+        <a href="06-admin-panel.html" class="nav-link"><span class="nav-num">6</span> Admin Panel</a>
+
+        <a href="07-mobile-app.html" class="nav-link"><span class="nav-num">7</span> Mobile App</a>
+
+        <a href="08-branding.html" class="nav-link"><span class="nav-num">8</span> Branding</a>
+
+        <a href="09-go-live-checklist.html" class="nav-link"><span class="nav-num">9</span> Go-live Checklist</a>
+
+        <a href="10-operations.html" class="nav-link"><span class="nav-num">10</span> Operations</a>
+
+        <a href="11-troubleshooting.html" class="nav-link"><span class="nav-num">11</span> Troubleshooting</a>
+
+        <a href="12-security.html" class="nav-link"><span class="nav-num">12</span> Security</a>
+
+        <a href="13-licences.html" class="nav-link"><span class="nav-num">13</span> Licences</a>
+
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Resources</div><a href="support.html" class="nav-link"><span
+            class="nav-num">💬</span> Support</a>
+      </div>
+
+    </nav>
+
+    <main class="main-content">
+
+      <div class="content-wrap">
+
+        <div class="page-hero">
+
+          <div class="page-hero-eyebrow">Guide 13</div>
+
+          <h1>Licences &amp; Third-party Components</h1>
+
+          <p>This is not legal advice. Review the licence terms with your adviser before selling or distributing the
+            system.</p>
+
+        </div>
+
+
+
+        <div class="doc-content">
+
+
+
+          <div class="alert-box warn">
+
+            <span class="alert-box-icon">âš–ï¸</span>
+
+            <p>Review all licence terms with a legal adviser before selling or distributing. Component licences can have
+              commercial implications.</p>
+
+          </div>
+
+
+
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Purpose</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td><strong>Traccar</strong></td>
+                  <td>GPS server</td>
+                  <td>Open source; check licence terms (the build supplied is customised)</td>
+                </tr>
+
+                <tr>
+                  <td><strong>Flutter and Dart packages</strong></td>
+                  <td>Mobile app</td>
+                  <td>Open source; each package has its own licence</td>
+                </tr>
+
+                <tr>
+                  <td><strong>Node.js packages</strong></td>
+                  <td>Backend and admin panel</td>
+                  <td>Open source; each package has its own licence</td>
+                </tr>
+
+                <tr>
+                  <td><strong>PostgreSQL</strong></td>
+                  <td>Tracking database</td>
+                  <td>Open source</td>
+                </tr>
+
+                <tr>
+                  <td><strong>MongoDB</strong></td>
+                  <td>Application database</td>
+                  <td>Check the edition and licence you deploy</td>
+                </tr>
+
+                <tr>
+                  <td><strong>Google Maps Platform</strong></td>
+                  <td>Maps in the app</td>
+                  <td>Commercial; your own account and key</td>
+                </tr>
+
+                <tr>
+                  <td><strong>Firebase</strong></td>
+                  <td>Push notifications</td>
+                  <td>Commercial; your own project</td>
+                </tr>
+
+                <tr>
+                  <td><strong>Razorpay</strong></td>
+                  <td>Payments</td>
+                  <td>Commercial; your own account</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+
+
+          <h2 id="software-licence">Licence of this software</h2>
+
+          <div class="alert-box info">
+
+            <span class="alert-box-icon">📄</span>
+
+            <p>Add your licence terms for the white-label package here, or link to your <code>LICENSE</code> file. See
+              <code>LICENSE</code> in the repository root.</p>
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <footer class="doc-footer">
+
+          <div class="doc-footer-nav">
+
+            <a href="12-security.html" class="footer-nav-btn"><span>Prev</span> Security</a>
+
+          </div>
+
+          <div class="doc-footer-nav">
+
+            <a href="index.html" class="footer-nav-btn"><span>Back to</span> Overview →</a>
+
+          </div>
+
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="assets/app.js"></script>
+
+</body>
+
+</html>

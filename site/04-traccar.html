@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Traccar Server — TrackRoutePro Docs</title>
+
+  <meta name="description"
+    content="Install, configure and operate the customised Traccar 6.0 GPS server for TrackRoutePro." />
+
+  <link rel="stylesheet" href="assets/style.css" />
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="19" y2="6" />
+        <line x1="3" y1="12" x2="19" y2="12" />
+        <line x1="3" y1="18" x2="19" y2="18" />
+      </svg>
+
+    </button>
+
+    <a href="index.html" class="header-brand">
+
+      <img src="assets/logo.jpg" alt="TrackRoutePro logo" />
+
+      <div>
+        <div class="header-brand-name">TrackRoutePro</div>
+        <div class="header-brand-sub">Whitelabel Edition</div>
+      </div>
+
+    </a>
+
+    <div class="header-spacer"></div>
+
+    <span class="header-badge">v1.0 Docs</span>
+
+  </header>
+
+  <div id="sidebar-overlay"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:89;backdrop-filter:blur(4px)"></div>
+
+  <div class="layout">
+
+    <nav class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Getting Started</div><a href="index.html" class="nav-link"><span
+            class="nav-num">🏠 </span> Overview</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Documentation</div>
+
+        <a href="01-architecture.html" class="nav-link"><span class="nav-num">1</span> Architecture</a>
+
+        <a href="02-requirements.html" class="nav-link"><span class="nav-num">2</span> Requirements</a>
+
+        <a href="03-server-setup.html" class="nav-link"><span class="nav-num">3</span> Server Setup</a>
+
+        <a href="04-traccar.html" class="nav-link"><span class="nav-num">4</span> Traccar Server</a>
+
+        <a href="05-backend.html" class="nav-link"><span class="nav-num">5</span> Backend</a>
+
+        <a href="06-admin-panel.html" class="nav-link"><span class="nav-num">6</span> Admin Panel</a>
+
+        <a href="07-mobile-app.html" class="nav-link"><span class="nav-num">7</span> Mobile App</a>
+
+        <a href="08-branding.html" class="nav-link"><span class="nav-num">8</span> Branding</a>
+
+        <a href="09-go-live-checklist.html" class="nav-link"><span class="nav-num">9</span> Go-live Checklist</a>
+
+        <a href="10-operations.html" class="nav-link"><span class="nav-num">10</span> Operations</a>
+
+        <a href="11-troubleshooting.html" class="nav-link"><span class="nav-num">11</span> Troubleshooting</a>
+
+        <a href="12-security.html" class="nav-link"><span class="nav-num">12</span> Security</a>
+
+        <a href="13-licences.html" class="nav-link"><span class="nav-num">13</span> Licences</a>
+
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Resources</div><a href="support.html" class="nav-link"><span
+            class="nav-num">💬</span> Support</a>
+      </div>
+
+    </nav>
+
+    <main class="main-content">
+
+      <div class="content-wrap">
+
+        <div class="page-hero">
+
+          <div class="page-hero-eyebrow">Guide 04</div>
+
+          <h1>Traccar Server</h1>
+
+          <p>The package includes a <strong>customised Traccar 6.0</strong>. Use the supplied build — not stock Traccar.
+          </p>
+
+        </div>
+
+
+
+        <div class="doc-content">
+
+
+
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Detail</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>Version</td>
+                  <td>Traccar 6.0, customised</td>
+                </tr>
+
+                <tr>
+                  <td>Run command</td>
+                  <td><code>java -jar target/tracker-server.jar</code></td>
+                </tr>
+
+                <tr>
+                  <td>Web UI</td>
+                  <td><code>./traccar-web/simple</code> (customised CSS, logo, branding)</td>
+                </tr>
+
+                <tr>
+                  <td>Config file</td>
+                  <td><code>traccar.xml</code></td>
+                </tr>
+
+                <tr>
+                  <td>Notification templates</td>
+                  <td><code>templates/short/</code> inside the Traccar folder</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+
+
+          <h2 id="install">4.1 Install</h2>
+
+          <ol>
+
+            <li>Copy the supplied Traccar folder to the server (for example <code>/opt/traccar</code>).</li>
+
+            <li>Edit <code>traccar.xml</code> (section 4.3): database connection, ports, Firebase service account.</li>
+
+            <li>Start it:</li>
+
+          </ol>
+
+          <pre data-lang="bash"><code>cd /opt/traccar
+
+nohup java -jar target/tracker-server.jar > traccar.log 2>&1 &
+
+tail -f traccar.log</code></pre>
+
+          <div class="alert-box warn">
+
+            <span class="alert-box-icon">⚠️</span>
+
+            <p><strong>Disk warning:</strong> the Traccar log can grow 25–30 GB in a few days. See <a
+                href="10-operations.html#disk-space">Operations: disk space</a>.</p>
+
+          </div>
+
+
+
+          <h3 id="systemd">Recommended: run as a systemd service</h3>
+
+          <pre data-lang="ini"><code># /etc/systemd/system/traccar.service
+
+[Unit]
+
+Description=Traccar (Track Route Pro)
+
+After=network.target postgresql.service
+
+
+
+[Service]
+
+WorkingDirectory=/opt/traccar
+
+ExecStart=/usr/bin/java -jar target/tracker-server.jar
+
+Restart=always
+
+StandardOutput=null
+
+StandardError=journal
+
+
+
+[Install]
+
+WantedBy=multi-user.target</code></pre>
+
+          <pre data-lang="bash"><code>sudo systemctl daemon-reload
+
+sudo systemctl enable --now traccar</code></pre>
+
+
+
+          <h2 id="ports">4.2 Device ports</h2>
+
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Protocol</th>
+                  <th>Config key</th>
+                  <th>Port</th>
+                  <th>Default</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>GT06 / Concox</td>
+                  <td><code>gt06.port</code></td>
+                  <td>5023</td>
+                  <td>Enabled</td>
+                </tr>
+
+                <tr>
+                  <td>UPro</td>
+                  <td><code>upro.port</code></td>
+                  <td>5095</td>
+                  <td>Enabled</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+          <p>Add other protocols by adding their <code>&lt;protocol&gt;.port</code> entry and opening the port in the
+            firewall.</p>
+
+
+
+          <h2 id="config">4.3 Configuration reference</h2>
+
+          <p>Active settings from the reference <code>traccar.xml</code>. Replace every <code>&lt;...&gt;</code> value.
+          </p>
+
+          <pre data-lang="xml"><code>&lt;!-- Web / API --&gt;
+
+&lt;entry key='web.path'&gt;./traccar-web/simple&lt;/entry&gt;
+
+&lt;entry key='web.port'&gt;8083&lt;/entry&gt;
+
+
+
+&lt;!-- Logging --&gt;
+
+&lt;entry key='logger.console'&gt;true&lt;/entry&gt;
+
+
+
+&lt;!-- Database --&gt;
+
+&lt;entry key='database.driver'&gt;org.postgresql.Driver&lt;/entry&gt;
+
+&lt;entry key='database.url'&gt;jdbc:postgresql://localhost:5432/traccar&lt;/entry&gt;
+
+&lt;entry key='database.user'&gt;traccar&lt;/entry&gt;
+
+&lt;entry key='database.password'&gt;&lt;DB_PASSWORD&gt;&lt;/entry&gt;
+
+&lt;entry key='database.connectionTimeout'&gt;30000&lt;/entry&gt;
+
+&lt;entry key='database.idleTimeout'&gt;600000&lt;/entry&gt;
+
+&lt;entry key='database.maxLifetime'&gt;1800000&lt;/entry&gt;
+
+
+
+&lt;!-- Device ports --&gt;
+
+&lt;entry key='gt06.port'&gt;5023&lt;/entry&gt;
+
+&lt;entry key='upro.port'&gt;5095&lt;/entry&gt;
+
+
+
+&lt;!-- Device status --&gt;
+
+&lt;entry key='status.timeout'&gt;300&lt;/entry&gt;
+
+
+
+&lt;!-- Filters --&gt;
+
+&lt;entry key='filter.enable'&gt;true&lt;/entry&gt;
+
+&lt;entry key='filter.invalid'&gt;true&lt;/entry&gt;
+
+&lt;entry key='filter.zero'&gt;true&lt;/entry&gt;
+
+&lt;entry key='filter.future'&gt;600&lt;/entry&gt;
+
+&lt;entry key='filter.past'&gt;300&lt;/entry&gt;
+
+&lt;entry key='filter.minPeriod'&gt;10&lt;/entry&gt;
+
+&lt;entry key='filter.duplicate'&gt;true&lt;/entry&gt;
+
+&lt;entry key='filter.static'&gt;true&lt;/entry&gt;
+
+&lt;entry key='filter.stationaryPeriod'&gt;300&lt;/entry&gt;
+
+&lt;entry key='filter.stationaryDistance'&gt;20&lt;/entry&gt;
+
+&lt;entry key='filter.distance'&gt;0&lt;/entry&gt;
+
+&lt;entry key='filter.skipLimit'&gt;300&lt;/entry&gt;
+
+&lt;entry key='filter.skipAttributes.enable'&gt;true&lt;/entry&gt;
+
+&lt;entry key='filter.skipAttributes'&gt;ignition&lt;/entry&gt;
+
+&lt;entry key='filter.maxSpeed'&gt;200&lt;/entry&gt;
+
+&lt;entry key='filter.accuracy'&gt;30&lt;/entry&gt;
+
+&lt;entry key='filter.skipOld'&gt;false&lt;/entry&gt;
+
+&lt;entry key='filter.period'&gt;0&lt;/entry&gt;
+
+&lt;entry key='coordinates.filter'&gt;true&lt;/entry&gt;
+
+
+
+&lt;!-- Motion and ignition events --&gt;
+
+&lt;entry key='event.motion'&gt;true&lt;/entry&gt;
+
+&lt;entry key='event.motion.start'&gt;true&lt;/entry&gt;
+
+&lt;entry key='event.motion.stop'&gt;true&lt;/entry&gt;
+
+&lt;entry key='motion.inactive.timeout'&gt;600&lt;/entry&gt;
+
+&lt;entry key='event.ignition.on'&gt;true&lt;/entry&gt;
+
+&lt;entry key='event.ignition.off'&gt;true&lt;/entry&gt;
+
+&lt;entry key='event.motion.speedThreshold'&gt;4&lt;/entry&gt;
+
+&lt;entry key='event.fuelIncrease.threshold'&gt;5&lt;/entry&gt;
+
+&lt;entry key='event.fuelDrop.threshold'&gt;5&lt;/entry&gt;
+
+
+
+&lt;!-- Trips --&gt;
+
+&lt;entry key='report.trip.useIgnition'&gt;true&lt;/entry&gt;
+
+&lt;entry key='report.trip.minimalTripDuration'&gt;60&lt;/entry&gt;
+
+&lt;entry key='report.trip.minimalTripDistance'&gt;50&lt;/entry&gt;
+
+&lt;entry key='report.trip.minimalParkingDuration'&gt;120&lt;/entry&gt;
+
+&lt;entry key='report.trip.minimalNoDataDuration'&gt;600&lt;/entry&gt;
+
+
+
+&lt;!-- Geocoding --&gt;
+
+&lt;entry key='geolocation.enable'&gt;false&lt;/entry&gt;
+
+&lt;entry key='geocoder.type'&gt;pluscodes&lt;/entry&gt;
+
+&lt;entry key='geocoder.cacheSize'&gt;100000&lt;/entry&gt;
+
+
+
+&lt;!-- Notifications --&gt;
+
+&lt;entry key='notificator.types'&gt;command,web,mail,sms,firebase,traccar,telegram,pushover&lt;/entry&gt;
+
+&lt;entry key='notificator.firebase.serviceAccount'&gt;&lt;YOUR_FIREBASE_SERVICE_ACCOUNT_JSON&gt;&lt;/entry&gt;
+
+
+
+&lt;!-- Misc --&gt;
+
+&lt;entry key='atrack.custom'&gt;true&lt;/entry&gt;
+
+&lt;entry key='media.path'&gt;./target/media&lt;/entry&gt;</code></pre>
+
+
+
+          <h3 id="key-settings">What the key settings do</h3>
+
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>Value</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td><code>filter.static</code></td>
+                  <td>true</td>
+                  <td>Keep stationary packets so ignition and stops are recorded</td>
+                </tr>
+
+                <tr>
+                  <td><code>filter.stationaryPeriod</code></td>
+                  <td>300</td>
+                  <td>One saved position every 5 minutes while parked</td>
+                </tr>
+
+                <tr>
+                  <td><code>filter.stationaryDistance</code></td>
+                  <td>20</td>
+                  <td>Ignore GPS drift up to 20 m while parked</td>
+                </tr>
+
+                <tr>
+                  <td><code>filter.minPeriod</code></td>
+                  <td>10</td>
+                  <td>At least 10 s between saved positions</td>
+                </tr>
+
+                <tr>
+                  <td><code>filter.accuracy</code></td>
+                  <td>30</td>
+                  <td>Drop poor-accuracy points</td>
+                </tr>
+
+                <tr>
+                  <td><code>filter.maxSpeed</code></td>
+                  <td>200</td>
+                  <td>Discard spikes above 200 km/h</td>
+                </tr>
+
+                <tr>
+                  <td><code>filter.past / filter.future</code></td>
+                  <td>300 / 600</td>
+                  <td>Drop packets too old or too far in the future</td>
+                </tr>
+
+                <tr>
+                  <td><code>filter.skipAttributes</code></td>
+                  <td>ignition</td>
+                  <td>Never skip a position when ignition changes</td>
+                </tr>
+
+                <tr>
+                  <td><code>motion.inactive.timeout</code></td>
+                  <td>600</td>
+                  <td>Stopped after 600 s without movement</td>
+                </tr>
+
+                <tr>
+                  <td><code>event.motion.speedThreshold</code></td>
+                  <td>4</td>
+                  <td>Speeds below 4 km/h count as stationary</td>
+                </tr>
+
+                <tr>
+                  <td><code>status.timeout</code></td>
+                  <td>300</td>
+                  <td>Device offline after 5 minutes of silence</td>
+                </tr>
+
+                <tr>
+                  <td><code>report.trip.useIgnition</code></td>
+                  <td>true</td>
+                  <td>Trips follow ignition state</td>
+                </tr>
+
+                <tr>
+                  <td><code>geolocation.enable</code></td>
+                  <td>false</td>
+                  <td>No external geocoding; app and backend resolve addresses</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+
+
+          <h3 id="disabled">Deliberately disabled</h3>
+
+          <p>Position forwarding (<code>forward.url</code>), the custom scheduler, event start/stop delays and
+            connection-pool size settings are disabled because they caused thread blocking or were unnecessary. Enable
+            the <strong>connection-pool settings</strong> when your fleet grows beyond roughly 200–300 devices.</p>
+
+
+
+          <h2 id="notifications">4.4 Notifications</h2>
+
+          <ul>
+
+            <li>Firebase service account: set in <code>notificator.firebase.serviceAccount</code>, or point to a JSON
+              file on disk.</li>
+
+            <li>Message templates: <code>templates/short/</code> in the Traccar folder.</li>
+
+            <li>An SMS HTTP gateway (<code>sms.http.url</code>, <code>sms.http.authorization</code>,
+              <code>sms.http.template</code>) is supported but disabled by default.</li>
+
+          </ul>
+
+
+
+          <h2 id="tasks">4.5 Everyday tasks</h2>
+
+          <p><strong>Add a device:</strong> Traccar panel → Settings → Devices → Add; enter name and device identifier
+            (IMEI) → Save.</p>
+
+          <p><strong>Geofences and users:</strong> created by the backend through Traccar's <code>/api/geofences</code>,
+            <code>/api/permissions</code> and <code>/api/users</code>. Customers normally manage geofences from the
+            mobile app.</p>
+
+
+
+          <h2 id="upgrade">4.6 Upgrading Traccar</h2>
+
+          <div class="alert-box warn">
+
+            <span class="alert-box-icon">⚠️</span>
+
+            <p>Both the Traccar source and its web front-end are customised, so an upgrade is <strong>not</strong> a
+              version bump. Re-apply the customisations on top of the new release (backend code and front-end), then
+              re-test the backend and the app. Back up PostgreSQL first, using client tools matching the server version.
+            </p>
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <footer class="doc-footer">
+
+          <div class="doc-footer-nav">
+
+            <a href="03-server-setup.html" class="footer-nav-btn"><span>Prev</span> Server Setup</a>
+
+          </div>
+
+          <div class="doc-footer-nav">
+
+            <a href="05-backend.html" class="footer-nav-btn"><span>Next</span> Backend →</a>
+
+          </div>
+
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="assets/app.js"></script>
+
+</body>
+
+</html>

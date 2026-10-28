@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Operations — TrackRoutePro Docs</title>
+
+  <meta name="description"
+    content="Routine care, service restarts, disk space, backups and updates for TrackRoutePro." />
+
+  <link rel="stylesheet" href="assets/style.css" />
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="19" y2="6" />
+        <line x1="3" y1="12" x2="19" y2="12" />
+        <line x1="3" y1="18" x2="19" y2="18" />
+      </svg>
+
+    </button>
+
+    <a href="index.html" class="header-brand">
+
+      <img src="assets/logo.jpg" alt="TrackRoutePro logo" />
+
+      <div>
+        <div class="header-brand-name">TrackRoutePro</div>
+        <div class="header-brand-sub">Whitelabel Edition</div>
+      </div>
+
+    </a>
+
+    <div class="header-spacer"></div>
+
+    <span class="header-badge">v1.0 Docs</span>
+
+  </header>
+
+  <div id="sidebar-overlay"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:89;backdrop-filter:blur(4px)"></div>
+
+  <div class="layout">
+
+    <nav class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Getting Started</div><a href="index.html" class="nav-link"><span
+            class="nav-num">🏠 </span> Overview</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Documentation</div>
+
+        <a href="01-architecture.html" class="nav-link"><span class="nav-num">1</span> Architecture</a>
+
+        <a href="02-requirements.html" class="nav-link"><span class="nav-num">2</span> Requirements</a>
+
+        <a href="03-server-setup.html" class="nav-link"><span class="nav-num">3</span> Server Setup</a>
+
+        <a href="04-traccar.html" class="nav-link"><span class="nav-num">4</span> Traccar Server</a>
+
+        <a href="05-backend.html" class="nav-link"><span class="nav-num">5</span> Backend</a>
+
+        <a href="06-admin-panel.html" class="nav-link"><span class="nav-num">6</span> Admin Panel</a>
+
+        <a href="07-mobile-app.html" class="nav-link"><span class="nav-num">7</span> Mobile App</a>
+
+        <a href="08-branding.html" class="nav-link"><span class="nav-num">8</span> Branding</a>
+
+        <a href="09-go-live-checklist.html" class="nav-link"><span class="nav-num">9</span> Go-live Checklist</a>
+
+        <a href="10-operations.html" class="nav-link"><span class="nav-num">10</span> Operations</a>
+
+        <a href="11-troubleshooting.html" class="nav-link"><span class="nav-num">11</span> Troubleshooting</a>
+
+        <a href="12-security.html" class="nav-link"><span class="nav-num">12</span> Security</a>
+
+        <a href="13-licences.html" class="nav-link"><span class="nav-num">13</span> Licences</a>
+
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Resources</div><a href="support.html" class="nav-link"><span
+            class="nav-num">💬</span> Support</a>
+      </div>
+
+    </nav>
+
+    <main class="main-content">
+
+      <div class="content-wrap">
+
+        <div class="page-hero">
+
+          <div class="page-hero-eyebrow">Guide 10</div>
+
+          <h1>Operations</h1>
+
+          <p>Routine care, restarts, disk management, backups and keeping the platform up to date.</p>
+
+        </div>
+
+
+
+        <div class="doc-content">
+
+
+
+          <h2 id="routine">Routine care</h2>
+
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>Server health (CPU, memory, disk)</td>
+                  <td>Daily or weekly</td>
+                </tr>
+
+                <tr>
+                  <td>Traccar log size</td>
+                  <td>Weekly</td>
+                </tr>
+
+                <tr>
+                  <td>Back up PostgreSQL and MongoDB</td>
+                  <td>Daily or weekly</td>
+                </tr>
+
+                <tr>
+                  <td>Back up code and configuration</td>
+                  <td>Weekly</td>
+                </tr>
+
+                <tr>
+                  <td>Check SSL certificates</td>
+                  <td>Monthly</td>
+                </tr>
+
+                <tr>
+                  <td>Review expiring subscriptions</td>
+                  <td>Weekly</td>
+                </tr>
+
+                <tr>
+                  <td>Clean old positions and events</td>
+                  <td>As needed (no scheduled clean-up exists)</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+          <div class="alert-box info">
+
+            <span class="alert-box-icon">💡</span>
+
+            <p>There are no built-in alerts for server-down or disk-full. Set up your own monitoring (e.g. UptimeRobot
+              or your host's alerts).</p>
+
+          </div>
+
+
+
+          <h2 id="restarts">Restart services</h2>
+
+
+
+          <h3>Traccar</h3>
+
+          <pre data-lang="bash"><code>sudo netstat -tulpn | grep :8083
+
+sudo kill -9 &lt;PID&gt;
+
+sudo netstat -tulpn | grep :8083        # nothing should be listed
+
+cd /opt/traccar
+
+nohup java -jar target/tracker-server.jar > traccar.log 2>&1 &
+
+tail -f traccar.log</code></pre>
+
+          <p>If you use the systemd unit: <code>sudo systemctl restart traccar</code>.</p>
+
+
+
+          <h3>Backend (PM2)</h3>
+
+          <pre data-lang="bash"><code>pm2 list
+
+pm2 restart &lt;PROJECT_NAME&gt;
+
+pm2 status
+
+pm2 logs &lt;PROJECT_NAME&gt;</code></pre>
+
+
+
+          <h3>PostgreSQL</h3>
+
+          <pre data-lang="bash"><code>sudo systemctl status postgresql
+
+sudo systemctl start postgresql</code></pre>
+
+
+
+          <h3>MongoDB (Docker)</h3>
+
+          <pre data-lang="bash"><code>cd &lt;PROJECT_FOLDER&gt;/mongodb-docker
+
+sudo docker ps
+
+sudo docker-compose down && sudo docker-compose up -d</code></pre>
+
+
+
+          <h3>Nginx</h3>
+
+          <pre data-lang="bash"><code>sudo nginx -t
+
+sudo systemctl status nginx
+
+sudo systemctl restart nginx</code></pre>
+
+
+
+          <h2 id="disk-space">Disk space</h2>
+
+          <div class="alert-box warn">
+
+            <span class="alert-box-icon">⚠️</span>
+
+            <p>The Traccar log can grow <strong>25–30 GB in two to three days</strong> and fill the disk. Rotate or
+              delete it regularly, or start Traccar without a log file:</p>
+
+          </div>
+
+          <pre data-lang="bash"><code>nohup java -jar target/tracker-server.jar > /dev/null 2>&1 &</code></pre>
+
+          <p>The trade-off is that no log is available for troubleshooting. Alternatively, use <code>logrotate</code> on
+            <code>traccar.log</code>.</p>
+
+          <p>Check database sizes:</p>
+
+          <pre
+            data-lang="bash"><code>sudo -u postgres psql -c "SELECT datname, pg_size_pretty(pg_database_size(datname)) FROM pg_database ORDER BY pg_database_size(datname) DESC;"</code></pre>
+
+
+
+          <h2 id="backups">Backups</h2>
+
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>What</th>
+                  <th>How</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>Server snapshot</td>
+                  <td>Your host's snapshot feature, weekly</td>
+                </tr>
+
+                <tr>
+                  <td>Backend code and config</td>
+                  <td>Weekly copy to secure, <strong>encrypted</strong> storage</td>
+                </tr>
+
+                <tr>
+                  <td>MongoDB</td>
+                  <td><code>mongodump</code></td>
+                </tr>
+
+                <tr>
+                  <td>Traccar PostgreSQL</td>
+                  <td><code>pg_dump</code></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+          <pre
+            data-lang="bash"><code># PostgreSQL backup
+
+pg_dump -U traccar -h localhost -p 5432 -F c -v -f backup.dump traccar
+
+
+
+# PostgreSQL restore
+
+pg_restore -U traccar -h &lt;DB_HOST&gt; -d &lt;DB_NAME&gt; backup.dump
+
+
+
+# MongoDB backup (@ in passwords must be URL-encoded as %40)
+
+mongodump --uri="mongodb://&lt;MONGO_USER&gt;:&lt;ENCODED_PASSWORD&gt;@localhost:27017/?authSource=admin" --out=./mongo-backup
+
+
+
+# MongoDB restore
+
+mongorestore --uri="mongodb://&lt;MONGO_USER&gt;:&lt;ENCODED_PASSWORD&gt;@localhost:27017/?authSource=admin" ./mongo-backup</code></pre>
+
+          <div class="alert-box warn">
+
+            <span class="alert-box-icon">⚠️</span>
+
+            <p>PostgreSQL client tools used for backup and restore must be the <strong>same version</strong> as the
+              server.</p>
+
+          </div>
+
+          <p>Example daily cron (as the backup user):</p>
+
+          <pre
+            data-lang="cron"><code>0 2 * * * pg_dump -U traccar -F c -f /backups/pg-$(date +\%F).dump traccar</code></pre>
+
+
+
+          <h2 id="updates">Updates</h2>
+
+          <ul>
+
+            <li><strong>Traccar:</strong> see <a href="04-traccar.html#upgrade">Upgrading Traccar</a>.</li>
+
+            <li><strong>Backend:</strong> pull, <code>npm install</code>, <code>npx tsc</code>,
+              <code>pm2 restart &lt;PROJECT_NAME&gt;</code>.</li>
+
+            <li>Changing the backend address requires updating the app's base URLs and publishing a new app version.
+            </li>
+
+          </ul>
+
+
+
+        </div>
+
+
+
+        <footer class="doc-footer">
+
+          <div class="doc-footer-nav">
+
+            <a href="09-go-live-checklist.html" class="footer-nav-btn"><span>Prev</span> Go-live Checklist</a>
+
+          </div>
+
+          <div class="doc-footer-nav">
+
+            <a href="11-troubleshooting.html" class="footer-nav-btn"><span>Next</span> Troubleshooting →</a>
+
+          </div>
+
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="assets/app.js"></script>
+
+</body>
+
+</html>

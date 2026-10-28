@@ -22,11 +22,3 @@ Create a user in MongoDB (or via your handover seed data) with role `superadmin`
 ## Branding
 
 Name, logo and colours: see [Branding](08-branding.md).
-
-## Features
-
-<!-- Fill in from your admin panel: one row per feature -->
-
-| Feature | What it does |
-| --- | --- |
-| <FEATURE> | <DESCRIPTION> |

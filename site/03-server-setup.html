@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Server Setup — TrackRoutePro Docs</title>
+
+  <meta name="description"
+    content="Ubuntu server setup: Java, PostgreSQL, Node.js, MongoDB, Nginx, SSL and PM2 for TrackRoutePro." />
+
+  <link rel="stylesheet" href="assets/style.css" />
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="19" y2="6" />
+        <line x1="3" y1="12" x2="19" y2="12" />
+        <line x1="3" y1="18" x2="19" y2="18" />
+      </svg>
+
+    </button>
+
+    <a href="index.html" class="header-brand">
+
+      <img src="assets/logo.jpg" alt="TrackRoutePro logo" />
+
+      <div>
+        <div class="header-brand-name">TrackRoutePro</div>
+        <div class="header-brand-sub">Whitelabel Edition</div>
+      </div>
+
+    </a>
+
+    <div class="header-spacer"></div>
+
+    <span class="header-badge">v1.0 Docs</span>
+
+  </header>
+
+  <div id="sidebar-overlay"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:89;backdrop-filter:blur(4px)"></div>
+
+  <div class="layout">
+
+    <nav class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Getting Started</div><a href="index.html" class="nav-link"><span
+            class="nav-num">🏠 </span> Overview</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Documentation</div>
+
+        <a href="01-architecture.html" class="nav-link"><span class="nav-num">1</span> Architecture</a>
+
+        <a href="02-requirements.html" class="nav-link"><span class="nav-num">2</span> Requirements</a>
+
+        <a href="03-server-setup.html" class="nav-link"><span class="nav-num">3</span> Server Setup</a>
+
+        <a href="04-traccar.html" class="nav-link"><span class="nav-num">4</span> Traccar Server</a>
+
+        <a href="05-backend.html" class="nav-link"><span class="nav-num">5</span> Backend</a>
+
+        <a href="06-admin-panel.html" class="nav-link"><span class="nav-num">6</span> Admin Panel</a>
+
+        <a href="07-mobile-app.html" class="nav-link"><span class="nav-num">7</span> Mobile App</a>
+
+        <a href="08-branding.html" class="nav-link"><span class="nav-num">8</span> Branding</a>
+
+        <a href="09-go-live-checklist.html" class="nav-link"><span class="nav-num">9</span> Go-live Checklist</a>
+
+        <a href="10-operations.html" class="nav-link"><span class="nav-num">10</span> Operations</a>
+
+        <a href="11-troubleshooting.html" class="nav-link"><span class="nav-num">11</span> Troubleshooting</a>
+
+        <a href="12-security.html" class="nav-link"><span class="nav-num">12</span> Security</a>
+
+        <a href="13-licences.html" class="nav-link"><span class="nav-num">13</span> Licences</a>
+
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Resources</div><a href="support.html" class="nav-link"><span
+            class="nav-num">💬</span> Support</a>
+      </div>
+
+    </nav>
+
+    <main class="main-content">
+
+      <div class="content-wrap">
+
+        <div class="page-hero">
+
+          <div class="page-hero-eyebrow">Guide 03</div>
+
+          <h1>Server Setup</h1>
+
+          <p>Commands assume Ubuntu with a sudo user. Adjust versions to what your package sources provide.</p>
+
+        </div>
+
+
+
+        <div class="doc-content">
+
+
+
+          <h2 id="base">3.1 Base packages</h2>
+
+          <pre data-lang="bash"><code>sudo apt update && sudo apt upgrade -y
+
+sudo apt install -y nginx certbot python3-certbot-nginx ufw git curl</code></pre>
+
+
+
+          <h2 id="java">3.2 Java (for Traccar)</h2>
+
+          <pre data-lang="bash"><code>sudo apt install -y default-jre-headless
+
+java -version</code></pre>
+
+
+
+          <h2 id="postgresql">3.3 PostgreSQL</h2>
+
+          <pre data-lang="bash"><code>sudo apt install -y postgresql postgresql-contrib
+
+sudo -u postgres psql</code></pre>
+
+          <pre data-lang="sql"><code>CREATE USER traccar WITH PASSWORD '&lt;DB_PASSWORD&gt;';
+
+CREATE DATABASE traccar OWNER traccar;</code></pre>
+
+          <p>Keep PostgreSQL listening on localhost only (the default).</p>
+
+
+
+          <h2 id="nodejs">3.4 Node.js and PM2</h2>
+
+          <p>Install Node.js (v24.x was used in development) using your preferred method (NodeSource or nvm), then:</p>
+
+          <pre data-lang="bash"><code>sudo npm install -g pm2
+
+pm2 startup        # run the command it prints</code></pre>
+
+
+
+          <h2 id="mongodb">3.5 MongoDB (Docker)</h2>
+
+          <pre data-lang="bash"><code>sudo apt install -y docker.io docker-compose</code></pre>
+
+          <p>Create <code>mongodb-docker/docker-compose.yml</code> inside your backend project folder:</p>
+
+          <pre data-lang="yaml"><code>services:
+
+  mongo:
+
+    image: mongo:&lt;VERSION&gt;
+
+    restart: always
+
+    ports:
+
+      - "127.0.0.1:27017:27017"   # localhost only
+
+    environment:
+
+      MONGO_INITDB_ROOT_USERNAME: &lt;MONGO_USER&gt;
+
+      MONGO_INITDB_ROOT_PASSWORD: &lt;MONGO_PASSWORD&gt;
+
+    volumes:
+
+      - ./data:/data/db</code></pre>
+
+          <pre data-lang="bash"><code>cd mongodb-docker
+
+sudo docker-compose up -d
+
+sudo docker ps</code></pre>
+
+          <div class="alert-box info">
+
+            <span class="alert-box-icon">🏠“‹</span>
+
+            <p>Check the MongoDB edition and licence you deploy (see <a href="13-licences.html">Licences</a>).</p>
+
+          </div>
+
+
+
+          <h2 id="firewall">3.6 Firewall</h2>
+
+          <pre data-lang="bash"><code>sudo ufw allow 22/tcp
+
+sudo ufw allow 80,443/tcp
+
+sudo ufw allow 5000:6000/tcp
+
+sudo ufw enable</code></pre>
+
+          <div class="alert-box danger">
+
+            <span class="alert-box-icon">🏠š«</span>
+
+            <p>Do <strong>not</strong> open 5432, 27017, 3100 or 8083 to the internet.</p>
+
+          </div>
+
+
+
+          <h2 id="ssl">3.7 DNS and SSL</h2>
+
+          <ol>
+
+            <li>Point <code>api.&lt;YOUR_DOMAIN&gt;</code> and <code>track.&lt;YOUR_DOMAIN&gt;</code> (A records) to the
+              server IP.</li>
+
+            <li>Create Nginx site configs in <code>/etc/nginx/sites-available/</code> and symlink to
+              <code>sites-enabled/</code>.</li>
+
+          </ol>
+
+          <p>Backend (port 3100):</p>
+
+          <pre data-lang="nginx"><code>server {
+
+    server_name api.&lt;YOUR_DOMAIN&gt;;
+
+    location / {
+
+        proxy_pass http://127.0.0.1:3100;
+
+        proxy_http_version 1.1;
+
+        proxy_set_header Upgrade $http_upgrade;      # WebSocket support
+
+        proxy_set_header Connection "upgrade";
+
+        proxy_set_header Host $host;
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+    }
+
+}</code></pre>
+
+          <p>Traccar (port 8083): same pattern with <code>server_name track.&lt;YOUR_DOMAIN&gt;;</code> and
+            <code>proxy_pass http://127.0.0.1:8083;</code>. Traccar also uses WebSockets, so keep the Upgrade headers.
+          </p>
+
+          <ol start="3">
+
+            <li>Issue certificates:</li>
+
+          </ol>
+
+          <pre data-lang="bash"><code>sudo nginx -t && sudo systemctl reload nginx
+
+sudo certbot --nginx -d api.&lt;YOUR_DOMAIN&gt; -d track.&lt;YOUR_DOMAIN&gt;
+
+sudo certbot renew --dry-run</code></pre>
+
+
+
+        </div>
+
+
+
+        <footer class="doc-footer">
+
+          <div class="doc-footer-nav">
+
+            <a href="02-requirements.html" class="footer-nav-btn"><span>Prev</span> Requirements</a>
+
+          </div>
+
+          <div class="doc-footer-nav">
+
+            <a href="04-traccar.html" class="footer-nav-btn"><span>Next</span> Traccar Server →</a>
+
+          </div>
+
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="assets/app.js"></script>
+
+</body>
+
+</html>

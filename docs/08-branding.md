@@ -2,8 +2,8 @@
 
 | Area | What can be branded | What you supply |
 | --- | --- | --- |
-| Mobile app | App name, icon, splash screen, colours, languages, store listing | Name, logo files, brand colours, translations |
-| Admin panel | Name, logo, colours | Logo files, colours, web address |
+| Mobile app | App name, icon, splash screen,  languages, store listing | Name, logo files, translations |
+| Admin panel | Name, logo, colours | Logo files,  web address |
 | Traccar panel | Logo, colours and layout (stylesheet), notification templates | Logo files, colours, message wording |
 | Emails | Templates in `src/MailBody/` | Sender name, logo, wording |
 | Push notifications | Sent from your Firebase project under your app | Your Firebase project |

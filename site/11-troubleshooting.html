@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Troubleshooting — TrackRoutePro Docs</title>
+
+  <meta name="description" content="Common problems and first checks for TrackRoutePro GPS tracking platform." />
+
+  <link rel="stylesheet" href="assets/style.css" />
+
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="19" y2="6" />
+        <line x1="3" y1="12" x2="19" y2="12" />
+        <line x1="3" y1="18" x2="19" y2="18" />
+      </svg>
+
+    </button>
+
+    <a href="index.html" class="header-brand">
+
+      <img src="assets/logo.jpg" alt="TrackRoutePro logo" />
+
+      <div>
+        <div class="header-brand-name">TrackRoutePro</div>
+        <div class="header-brand-sub">Whitelabel Edition</div>
+      </div>
+
+    </a>
+
+    <div class="header-spacer"></div>
+
+    <span class="header-badge">v1.0 Docs</span>
+
+  </header>
+
+  <div id="sidebar-overlay"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:89;backdrop-filter:blur(4px)"></div>
+
+  <div class="layout">
+
+    <nav class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Getting Started</div><a href="index.html" class="nav-link"><span
+            class="nav-num">🏠 </span> Overview</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Documentation</div>
+
+        <a href="01-architecture.html" class="nav-link"><span class="nav-num">1</span> Architecture</a>
+
+        <a href="02-requirements.html" class="nav-link"><span class="nav-num">2</span> Requirements</a>
+
+        <a href="03-server-setup.html" class="nav-link"><span class="nav-num">3</span> Server Setup</a>
+
+        <a href="04-traccar.html" class="nav-link"><span class="nav-num">4</span> Traccar Server</a>
+
+        <a href="05-backend.html" class="nav-link"><span class="nav-num">5</span> Backend</a>
+
+        <a href="06-admin-panel.html" class="nav-link"><span class="nav-num">6</span> Admin Panel</a>
+
+        <a href="07-mobile-app.html" class="nav-link"><span class="nav-num">7</span> Mobile App</a>
+
+        <a href="08-branding.html" class="nav-link"><span class="nav-num">8</span> Branding</a>
+
+        <a href="09-go-live-checklist.html" class="nav-link"><span class="nav-num">9</span> Go-live Checklist</a>
+
+        <a href="10-operations.html" class="nav-link"><span class="nav-num">10</span> Operations</a>
+
+        <a href="11-troubleshooting.html" class="nav-link"><span class="nav-num">11</span> Troubleshooting</a>
+
+        <a href="12-security.html" class="nav-link"><span class="nav-num">12</span> Security</a>
+
+        <a href="13-licences.html" class="nav-link"><span class="nav-num">13</span> Licences</a>
+
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Resources</div><a href="support.html" class="nav-link"><span
+            class="nav-num">💬</span> Support</a>
+      </div>
+
+    </nav>
+
+    <main class="main-content">
+
+      <div class="content-wrap">
+
+        <div class="page-hero">
+
+          <div class="page-hero-eyebrow">Guide 11</div>
+
+          <h1>Troubleshooting</h1>
+
+          <p>Common problems and the first checks to perform when something goes wrong.</p>
+
+        </div>
+
+
+
+        <div class="doc-content">
+
+
+
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Problem</th>
+                  <th>First checks</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>🖥️´ <strong>Vehicles show offline</strong></td>
+                  <td>Device power and SIM data; Traccar running; the device's port open in the firewall; device
+                    configured with the right server and port</td>
+                </tr>
+
+                <tr>
+                  <td>🏠•’ <strong>Location old or not updating</strong></td>
+                  <td>Device signal and placement; ignition cycle; Traccar log</td>
+                </tr>
+
+                <tr>
+                  <td>🔔 <strong>No alerts on phones</strong></td>
+                  <td>Firebase config in app, backend and Traccar all from the <strong>same</strong> project; app
+                    notification permission; backend running; user logged in</td>
+                </tr>
+
+                <tr>
+                  <td>🏠š« <strong>App cannot log in</strong></td>
+                  <td>Backend running; SMS provider working for OTP; correct <code>baseUrl</code> in the app</td>
+                </tr>
+
+                <tr>
+                  <td>🌐 <strong>Some screens load from the wrong server</strong></td>
+                  <td><code>basebackUrl</code> differs between <code>project_urls.dart</code> and
+                    <code>track_device.dart</code></td>
+                </tr>
+
+                <tr>
+                  <td>🏠—ºï¸ <strong>Map is blank</strong></td>
+                  <td>Google Maps key missing, restricted incorrectly, or API not enabled</td>
+                </tr>
+
+                <tr>
+                  <td>🖥️ <strong>Admin panel will not open</strong></td>
+                  <td>Static hosting and domain; backend running; API base URL</td>
+                </tr>
+
+                <tr>
+                  <td>🖥️‘ <strong>Admin sign-in rejected</strong></td>
+                  <td>User must have the <code>superadmin</code> role</td>
+                </tr>
+
+                <tr>
+                  <td>🏠’³ <strong>Payment fails</strong></td>
+                  <td>Razorpay keys (test vs live), webhook configured, signature verification</td>
+                </tr>
+
+                <tr>
+                  <td>🚀 <strong>Speeds look too high</strong></td>
+                  <td>Backend returns <strong>knots</strong>; app converts to km/h</td>
+                </tr>
+
+                <tr>
+                  <td>🏠“ <strong>Geofence alert missing</strong></td>
+                  <td>Zone switched on, assigned to the vehicle, radius not too small</td>
+                </tr>
+
+                <tr>
+                  <td>🖥️ <strong>Route looks incomplete</strong></td>
+                  <td>Device offline or no GPS fix during part of the trip</td>
+                </tr>
+
+                <tr>
+                  <td>🏠’¾ <strong>Server disk full</strong></td>
+                  <td>Traccar log size (<code>ls -lh traccar.log</code>) and old data; clear space and restart</td>
+                </tr>
+
+                <tr>
+                  <td>🖥️Œ <strong>WebSocket / live updates fail</strong></td>
+                  <td>Nginx <code>Upgrade</code> headers present on API and Traccar sites</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+
+
+          <h2 id="commands">Useful commands</h2>
+
+          <pre data-lang="bash"><code>pm2 logs &lt;PROJECT_NAME&gt; --lines 100
+
+sudo systemctl status nginx postgresql
+
+sudo docker ps
+
+sudo certbot certificates
+
+df -h
+
+tail -f /opt/traccar/traccar.log</code></pre>
+
+
+
+        </div>
+
+
+
+        <footer class="doc-footer">
+
+          <div class="doc-footer-nav">
+
+            <a href="10-operations.html" class="footer-nav-btn"><span>Prev</span> Operations</a>
+
+          </div>
+
+          <div class="doc-footer-nav">
+
+            <a href="12-security.html" class="footer-nav-btn"><span>Next</span> Security →</a>
+
+          </div>
+
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="assets/app.js"></script>
+
+</body>
+
+</html>

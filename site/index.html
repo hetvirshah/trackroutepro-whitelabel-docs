@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TrackRoutePro Whitelabel Docs</title>
+
+  <meta name="description" content="Complete GPS vehicle tracking platform documentation — install on your own servers, sell under your own brand." />
+
+  <link rel="stylesheet" href="assets/style.css" />
+
+</head>
+
+<body>
+
+
+
+<!-- ——— HEADER ——— -->
+
+<header class="site-header">
+
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="12" x2="19" y2="12"/><line x1="3" y1="18" x2="19" y2="18"/></svg>
+
+  </button>
+
+  <a href="index.html" class="header-brand">
+
+    <img src="assets/logo.jpg" alt="TrackRoutePro logo" />
+
+    <div>
+
+      <div class="header-brand-name">TrackRoutePro</div>
+
+      <div class="header-brand-sub">Whitelabel Edition</div>
+
+    </div>
+
+  </a>
+
+  <div class="header-spacer"></div>
+
+  <span class="header-badge">v1.0 Docs</span>
+
+</header>
+
+
+
+<!-- ——— OVERLAY (mobile) ——— -->
+
+<div id="sidebar-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:89;backdrop-filter:blur(4px)"></div>
+
+
+
+<!-- ——— LAYOUT ——— -->
+
+<div class="layout">
+
+
+
+  <!-- SIDEBAR -->
+
+  <nav class="sidebar" aria-label="Documentation navigation">
+
+    <div class="sidebar-section">
+
+      <div class="sidebar-label">Getting Started</div>
+
+      <a href="index.html" class="nav-link"><span class="nav-num">🏠 </span> Overview</a>
+
+    </div>
+
+    <div class="sidebar-section">
+
+      <div class="sidebar-label">Documentation</div>
+
+      <a href="01-architecture.html" class="nav-link"><span class="nav-num">1</span> Architecture</a>
+
+      <a href="02-requirements.html" class="nav-link"><span class="nav-num">2</span> Requirements</a>
+
+      <a href="03-server-setup.html" class="nav-link"><span class="nav-num">3</span> Server Setup</a>
+
+      <a href="04-traccar.html" class="nav-link"><span class="nav-num">4</span> Traccar Server</a>
+
+      <a href="05-backend.html" class="nav-link"><span class="nav-num">5</span> Backend</a>
+
+      <a href="06-admin-panel.html" class="nav-link"><span class="nav-num">6</span> Admin Panel</a>
+
+      <a href="07-mobile-app.html" class="nav-link"><span class="nav-num">7</span> Mobile App</a>
+
+      <a href="08-branding.html" class="nav-link"><span class="nav-num">8</span> Branding</a>
+
+      <a href="09-go-live-checklist.html" class="nav-link"><span class="nav-num">9</span> Go-live Checklist</a>
+
+      <a href="10-operations.html" class="nav-link"><span class="nav-num">10</span> Operations</a>
+
+      <a href="11-troubleshooting.html" class="nav-link"><span class="nav-num">11</span> Troubleshooting</a>
+
+      <a href="12-security.html" class="nav-link"><span class="nav-num">12</span> Security</a>
+
+      <a href="13-licences.html" class="nav-link"><span class="nav-num">13</span> Licences</a>
+
+    </div>
+
+    <div class="sidebar-section">
+
+      <div class="sidebar-label">Resources</div>
+
+      <a href="support.html" class="nav-link"><span class="nav-num">💬</span> Support</a>
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+
+
+    <!-- Hero -->
+
+    <section class="hero-section">
+
+      <div style="display:flex;justify-content:center;margin-bottom:24px;">
+
+        <img src="assets/logo.jpg" alt="Logo" style="width:72px;height:72px;border-radius:16px;border:1px solid var(--border);box-shadow:0 4px 20px rgba(28,25,23,0.12);" />
+
+      </div>
+
+      <h1>TrackRoutePro<br/>Whitelabel Edition</h1>
+
+      <p class="subtitle">A complete GPS vehicle tracking platform you install on your own servers and sell under your own brand.</p>
+
+      <div class="hero-badge-row">
+
+        <span class="hero-badge"><span class="dot"></span>Flutter Mobile App</span>
+
+        <span class="hero-badge"><span class="dot"></span>Node.js Backend</span>
+
+        <span class="hero-badge"><span class="dot"></span>Traccar 6.0</span>
+
+        <span class="hero-badge"><span class="dot"></span>PostgreSQL + MongoDB</span>
+
+        <span class="hero-badge"><span class="dot"></span>Firebase FCM</span>
+
+        <span class="hero-badge"><span class="dot"></span>Razorpay Payments</span>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Platform summary table -->
+
+    <section style="padding: 0 48px 40px; max-width:1200px; margin:0 auto;">
+
+      <div class="doc-content">
+
+        <table>
+
+          <thead><tr><th>Part</th><th>What it is</th><th>Who uses it</th></tr></thead>
+
+          <tbody>
+
+            <tr><td><strong>Customer mobile app</strong></td><td>Flutter app for Android and iOS (white-label flavor <code>label</code>)</td><td>Your customers</td></tr>
+
+            <tr><td><strong>Admin panel</strong></td><td>Web panel, superadmin role only</td><td>Your business team</td></tr>
+
+            <tr><td><strong>Traccar panel</strong></td><td>Customised Traccar 6.0 web interface</td><td>Technical and support team</td></tr>
+
+            <tr><td><strong>Backend</strong></td><td>Node.js + TypeScript + Express, with Swagger API docs</td><td>Runs automatically</td></tr>
+
+            <tr><td><strong>Traccar server</strong></td><td>Customised Traccar 6.0 (Java)</td><td>Runs automatically</td></tr>
+
+            <tr><td><strong>Databases</strong></td><td>PostgreSQL (tracking data), MongoDB (application data)</td><td>Runs automatically</td></tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Customer features -->
+
+    <section class="features-section">
+
+      <h2>✨ Features your customers get</h2>
+
+      <div class="feature-grid">
+
+        <div class="feature-chip"><span class="icon">🗺️</span> Live tracking with follow mode, satellite & traffic layers</div>
+
+        <div class="feature-chip"><span class="icon">⏱️</span> Route history with replay, stops, idle time &amp; speed</div>
+
+        <div class="feature-chip"><span class="icon">🔔</span> Geofences with entry and exit alerts</div>
+
+        <div class="feature-chip"><span class="icon">⚡</span> Push alerts: over-speed, ignition, power cut, towing</div>
+
+        <div class="feature-chip"><span class="icon">🔒</span> Remote engine lock on supported installations</div>
+
+        <div class="feature-chip"><span class="icon">📊</span> PDF and Excel reports</div>
+
+        <div class="feature-chip"><span class="icon">💳</span> Subscription renewal with Razorpay online payment</div>
+
+        <div class="feature-chip"><span class="icon">🌐</span> Multiple languages, light and dark mode</div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Doc cards -->
+
+    <section style="padding: 0 48px 12px; max-width:1200px; margin:0 auto;">
+
+      <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:24px;color:var(--text-primary);">📚 Read the docs — in order for a first install</h2>
+
+    </section>
+
+    <div class="doc-grid">
+
+      <a href="01-architecture.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 01</div>
+
+        <div class="doc-card-title">Architecture</div>
+
+        <div class="doc-card-desc">Components, data flow, tech stack and reference deployment.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="02-requirements.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 02</div>
+
+        <div class="doc-card-title">Requirements</div>
+
+        <div class="doc-card-desc">Servers, software, third-party accounts and network ports.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="03-server-setup.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 03</div>
+
+        <div class="doc-card-title">Server Setup</div>
+
+        <div class="doc-card-desc">Ubuntu, Java, PostgreSQL, MongoDB, Node.js, Nginx, SSL, PM2.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="04-traccar.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 04</div>
+
+        <div class="doc-card-title">Traccar Server</div>
+
+        <div class="doc-card-desc">Install, configuration reference, device ports and everyday tasks.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="05-backend.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 05</div>
+
+        <div class="doc-card-title">Backend</div>
+
+        <div class="doc-card-desc">Configuration, run, deploy, API conventions and authentication.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="06-admin-panel.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 06</div>
+
+        <div class="doc-card-title">Admin Panel</div>
+
+        <div class="doc-card-desc">Hosting, connecting the web panel and creating the first superadmin.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="07-mobile-app.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 07</div>
+
+        <div class="doc-card-title">Mobile App</div>
+
+        <div class="doc-card-desc">Build, configure, sign and publish the Flutter white-label app.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="08-branding.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 08</div>
+
+        <div class="doc-card-title">Branding</div>
+
+        <div class="doc-card-desc">What to brand and where: app, panel, emails, domains and legal.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="09-go-live-checklist.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 09</div>
+
+        <div class="doc-card-title">Go-live Checklist</div>
+
+        <div class="doc-card-desc">Test everything before launch — step by step.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="10-operations.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 10</div>
+
+        <div class="doc-card-title">Operations</div>
+
+        <div class="doc-card-desc">Restarts, logs, disk space, backups and updates.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="11-troubleshooting.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 11</div>
+
+        <div class="doc-card-title">Troubleshooting</div>
+
+        <div class="doc-card-desc">Common problems and their first checks.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="12-security.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 12</div>
+
+        <div class="doc-card-title">Security Hardening</div>
+
+        <div class="doc-card-desc">Do this before going live with customers.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+      <a href="13-licences.html" class="doc-card">
+
+        <div class="doc-card-num">Guide 13</div>
+
+        <div class="doc-card-title">Licences</div>
+
+        <div class="doc-card-desc">Third-party components, services and licence terms.</div>
+
+        <div class="doc-card-arrow"> →</div>
+
+      </a>
+
+    </div>
+
+
+
+    <!-- Placeholder convention -->
+
+    <section style="padding: 0 48px 80px; max-width:1200px; margin:0 auto;">
+
+      <div class="alert-box info">
+
+        <span class="alert-box-icon">💡</span>
+
+        <p><strong>Placeholder convention:</strong> Values in <code>&lt;ANGLE_BRACKETS&gt;</code> are yours to supply, for example <code>&lt;YOUR_DOMAIN&gt;</code> or <code>&lt;DB_PASSWORD&gt;</code>. Never commit real secrets to a repository.</p>
+
+      </div>
+
+    </section>
+
+
+
+  </main>
+
+</div>
+
+
+
+<script src="assets/app.js"></script>
+
+</body>
+
+</html>
+
